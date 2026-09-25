@@ -11,7 +11,7 @@ React 18 · TypeScript · React Three Fiber · drei · postprocessing · three.j
 
 ## Live
 
-https://about.vishalippili.com — deployed on Vercel (root directory `web`, Vite preset).
+https://vishalippili.vercel.app — deployed on Vercel (root directory `web`, Vite preset).
 
 ## Run locally
 
