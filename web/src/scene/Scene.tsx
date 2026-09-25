@@ -1,12 +1,13 @@
 import { Suspense, useMemo, useRef, useEffect, type MutableRefObject } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
+import { useHasModel, MODEL_URL } from '../modelCheck'
 import { EffectComposer, Bloom, DepthOfField, SMAA } from '@react-three/postprocessing'
 import * as THREE from 'three'
 import Env from './Env'
 import { FOCUS_POINTS, FRAMES_PER_NODE } from '../data/focusPoints'
 
-useGLTF.preload(`${import.meta.env.BASE_URL}models/me.glb`)
+// preload happens once the model is known to exist (see modelCheck.ts)
 
 // 聚焦锚点（glb 内 focus-* 空对象），顺序对应履历节点；名单是唯一真源，见 data/focusPoints.ts
 const POINTS = FOCUS_POINTS as readonly string[]
@@ -573,6 +574,14 @@ function Post2({
 
 // 场景根组件：展示 me.glb（相机由 glb 动画 + 滚动驱动）
 export default function Scene() {
+  const hasModel = useHasModel()
+  // No character file yet → show just the background (content, scroll and overlays still work)
+  if (hasModel !== true) return <GradientBackground />
+  return <SceneWithModel />
+}
+
+function SceneWithModel() {
+  useGLTF.preload(MODEL_URL)
   const focusRef = useRef(new THREE.Vector3(0, 1.3, 0))
   const frameRef = useRef(0)
   // 逐锚点景深（intro3d 导出的 glb 携带）：Man2 每帧写、Post2 读。dofBokeh=-1 表示无参数 → Post2 走旧全局混合。

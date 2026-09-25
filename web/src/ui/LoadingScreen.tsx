@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useProgress } from '@react-three/drei'
+import { useHasModel } from '../modelCheck'
 
 // 全屏加载遮罩：读取 three LoadingManager 进度（useProgress），
 // 模型/贴图全部加载完（进度到过 100）后淡出并卸载，确保进入时场景已就绪。
@@ -15,9 +16,10 @@ export default function LoadingScreen() {
   const peak = useRef(0)
   peak.current = Math.max(peak.current, Math.min(Math.max(progress, 0), 100))
 
+  const hasModel = useHasModel()
   useEffect(() => {
-    if (progress >= 100) setReached(true)
-  }, [progress])
+    if (progress >= 100 || hasModel === false) setReached(true)
+  }, [progress, hasModel])
 
   // 到过 100% 后：停留片刻 → 淡出 → 卸载（一次性，锁定不受后续进度变化影响）
   useEffect(() => {

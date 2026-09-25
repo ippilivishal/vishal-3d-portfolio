@@ -9,6 +9,10 @@ Scrolling moves the camera through a 3D scene while the résumé, selected work 
 
 React 18 · TypeScript · React Three Fiber · drei · postprocessing · three.js · framer-motion · zustand · Vite
 
+## Live
+
+https://about.vishalippili.com — deployed on Vercel (root directory `web`, Vite preset).
+
 ## Run locally
 
 ```bash
@@ -31,7 +35,7 @@ npm run build    # static site in web/dist
 
 ## 3D character
 
-The character model is not in this repository yet. The site expects `web/public/models/me.glb` with a camera
+The character model is not in this repository yet; until it is, the site runs without a character. The site expects `web/public/models/me.glb` with a camera
 animation named `CameraAction` and focus anchors `focus-0` … `focus-5` (see `web/src/data/focusPoints.ts`).
 
 ## Credits
