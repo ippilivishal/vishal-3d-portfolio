@@ -8,6 +8,8 @@ import Resume from './ui/Resume'
 import Works from './ui/Works'
 import LoadingScreen from './ui/LoadingScreen'
 import Contact from './ui/Contact'
+import EventCounter from './ui/EventCounter'
+import Terminal from './ui/Terminal'
 import { useStore } from './store'
 
 function Backdrop() {
@@ -38,16 +40,13 @@ const COPY = {
 function Hero({ lang, cueOpacity }: { lang: Lang; cueOpacity: MotionValue<number> }) {
   const { title, paragraphs } = COPY[lang]
   const aboutRef = useRef(null)
-  // 触发起点提前：about 顶部位于视口 60% 处即开始（offset[0] 进度 0），到达顶部为进度 1
-  const { scrollYProgress } = useScroll({
-    target: aboutRef,
-    offset: ['start 0.6', 'start start'],
-  })
-  // 透明度在 about 顶部升到约 30vh 时归 0：起点 60%→进度 p 时顶部在 0.6×(1−p)，
-  // 令 =0.3 解得 p=0.5，故 opacity 区间 [0, 0.5]
+  // Driven by page scroll (not element position) so the hero is always sharp at the top of the page,
+  // whatever the screen height.
+  const { scrollY } = useScroll()
+  const vh = typeof window !== 'undefined' ? window.innerHeight : 800
+  const scrollYProgress = useTransform(scrollY, [0, vh * 0.6], [0, 1], { clamp: true })
   const blur = useTransform(scrollYProgress, [0, 0.5], ['blur(0px)', 'blur(16px)'])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  // 视差：标题上升更快、字距随滚动拉开；正文上升慢一点
   const titleY = useTransform(scrollYProgress, [0, 1], [0, -96])
   const bodyY = useTransform(scrollYProgress, [0, 1], [0, -52])
   const titleSpacing = useTransform(scrollYProgress, [0, 1], ['0.01em', '0.42em'])
@@ -151,11 +150,11 @@ export default function App() {
       <motion.div className="glass-rail" style={{ opacity: railOpacity }} aria-hidden="true" />
 
       {/* 首屏底部渐变底色，滚动后淡出 —— 暂时注释查看效果 */}
-      {/* <motion.div
+      <motion.div
         className="hero-gradient"
         style={{ opacity: heroGradientOpacity }}
         aria-hidden="true"
-      /> */}
+      />
 
       {/* 中英切换暂时隐藏，默认中文 */}
       {/* <LangToggle lang={lang} onToggle={() => setLang((l) => (l === 'en' ? 'zh' : 'en'))} /> */}
@@ -174,10 +173,15 @@ export default function App() {
         <div className="hero-meta hm-tr">Portfolio — 2026</div>
         <div className="hero-meta hm-bl">Systems · Scale · Craft</div>
         <div className="hero-meta hm-right">Based in Bengaluru</div>
+        <div className="hero-meta hm-br">
+          <EventCounter />
+        </div>
       </motion.div>
 
       {/* 全屏胶片噪点蒙层（multiply 混合） */}
       <NoiseOverlay />
+
+      <Terminal />
 
       {/* 可滚动内容 */}
       <main className="content">

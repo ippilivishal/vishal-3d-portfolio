@@ -21,14 +21,6 @@ function ResumeIcon() {
   )
 }
 
-function DownloadIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
-    </svg>
-  )
-}
-
 function LinkedInIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -40,6 +32,10 @@ function LinkedInIcon() {
 export default function Contact() {
   return (
     <section className="contact" aria-labelledby="contact-title">
+      <span className="contact-status">
+        <i aria-hidden="true" />
+        Available for new roles · October 2026
+      </span>
       <h2 id="contact-title" className="contact-title">
         Let’s talk
       </h2>
@@ -56,15 +52,6 @@ export default function Contact() {
           <ResumeIcon />
           <span>Résumé</span>
         </a>
-        <a
-          className="contact-link contact-link--icon"
-          href={RESUME_URL}
-          download="Vishal-Ippili-Resume.pdf"
-          aria-label="Download résumé (PDF)"
-          title="Download résumé (PDF)"
-        >
-          <DownloadIcon />
-        </a>
         <a className="contact-link" href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">
           <LinkedInIcon />
           <span>LinkedIn</span>
@@ -73,6 +60,9 @@ export default function Contact() {
       <a className="contact-mail" href={`mailto:${EMAIL}`}>
         {EMAIL}
       </a>
+      <button className="contact-term" onClick={() => window.dispatchEvent(new Event('open-terminal'))}>
+        <span aria-hidden="true">›_</span> psst — press <kbd>~</kbd> anywhere for a terminal
+      </button>
       <p className="contact-foot">Vishal Ippili · Bengaluru · 2026</p>
     </section>
   )

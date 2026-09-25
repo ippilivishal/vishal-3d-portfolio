@@ -1,9 +1,11 @@
 name: Deploy to GitHub Pages
 
 # 推送到 main 即自动构建 web/ 并发布到 GitHub Pages；也可在 Actions 页手动触发
+# Manual for now: the 3D character (web/public/models/me.glb) isn't committed yet, and the site
+# can't load without it. Once the model is in, restore the push trigger:
+#   push:
+#     branches: [main]
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 # GitHub Pages 部署所需权限
