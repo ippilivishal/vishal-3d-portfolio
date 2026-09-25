@@ -64,6 +64,16 @@ export default function Contact() {
         <span aria-hidden="true">›_</span> psst — press <kbd>~</kbd> anywhere for a terminal
       </button>
       <p className="contact-foot">Vishal Ippili · Bengaluru · 2026</p>
+      <p className="contact-credit">
+        3D character by{' '}
+        <a href="https://about.senbuzy.com/" target="_blank" rel="noopener noreferrer">
+          Sen Zheng
+        </a>
+        , used with permission · built on his open-source{' '}
+        <a href="https://github.com/dayinji/sen-3d-resume" target="_blank" rel="noopener noreferrer">
+          sen-3d-resume
+        </a>
+      </p>
     </section>
   )
 }

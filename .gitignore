@@ -12,6 +12,5 @@ deploy/
 *.blend1
 *.blend2
 
-# 3D character model: not committed until it is Vishal's own
-web/public/models/*.glb
+# backups of the 3D model
 web/public/models/*.glb.orig

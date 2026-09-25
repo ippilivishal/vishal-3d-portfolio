@@ -1838,3 +1838,18 @@ canvas {
 @media (max-width: 640px) {
   .hero-meta.hm-bl { display: none; }
 }
+
+.contact-credit {
+  margin-top: 1em;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: rgba(244, 241, 234, 0.4);
+}
+.contact-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contact-credit a:hover {
+  color: #ffd9b3;
+}

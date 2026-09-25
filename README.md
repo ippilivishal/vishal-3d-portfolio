@@ -35,7 +35,8 @@ npm run build    # static site in web/dist
 
 ## 3D character
 
-The character model is not in this repository yet; until it is, the site runs without a character. The site expects `web/public/models/me.glb` with a camera
+The current character (`web/public/models/me.glb`) is **Sen Zheng's model, used with his permission** (skin tone and
+stickers adapted). It is not covered by the MIT licence and will be replaced by Vishal's own character. The site expects `web/public/models/me.glb` with a camera
 animation named `CameraAction` and focus anchors `focus-0` … `focus-5` (see `web/src/data/focusPoints.ts`).
 
 ## Credits
