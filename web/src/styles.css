@@ -1698,7 +1698,8 @@ canvas {
   text-shadow: 0 1px 12px rgba(10, 20, 15, 0.4);
 }
 .ec-label {
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
+  max-width: 30em;
 }
 .ec-sub {
   text-transform: none;

@@ -36,8 +36,8 @@ export default function EventCounter() {
       <span className="ec-num" ref={numRef}>
         0
       </span>
-      <span className="ec-label">pricing events since you arrived</span>
-      <span className="ec-sub">at the ~33M-a-day rate I worked with</span>
+      <span className="ec-label">price updates my last platform would have handled since you arrived</span>
+      <span className="ec-sub">at the ~33M-a-day scale I built for</span>
     </div>
   )
 }
